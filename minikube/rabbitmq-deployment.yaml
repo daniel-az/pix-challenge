@@ -28,6 +28,7 @@ metadata:
 spec:
   selector:
     app: rabbitmq
+  type: NodePort
   ports:
   - name: amqp
     protocol: TCP

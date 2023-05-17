@@ -19,7 +19,23 @@ spec:
         app: server
     spec:
       containers:
-      - image: pix_challenge-server:latest
+      - image: docker.io/library/pix-challenge-server:latest
         name: pix-challenge-server-msx8h
         resources: {}
+        imagePullPolicy: Never
 status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: server-service
+  namespace: pix-challenge
+spec:
+  selector:
+    app: server
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8000
+      targetPort: 5000
+  type: ClusterIP

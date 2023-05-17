@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: consumer
+  name: consumer
+  namespace: pix-challenge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consumer
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: consumer
+    spec:
+      containers:
+      - image: docker.io/library/pix-challenge-consumer:latest
+        name: pix-challenge-consumer-msx8h
+        resources: {}
+        imagePullPolicy: Never
+        env:
+        - name: server_url
+          value: "http://server-service:8000/"
+        - name: queue_address
+          value: "rabbitmq"
+status: {}
