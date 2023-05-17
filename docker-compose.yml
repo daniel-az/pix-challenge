@@ -1,0 +1,29 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3.11-management
+    ports:
+      - "5672:5672" # Porta para a comunicação AMQP
+      - "15672:15672" # Porta para o RabbitMQ Management UI
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq # Persistência dos dados do RabbitMQ
+
+  server:
+    build:
+      context: ./server # Caminho para o diretório da aplicação server
+    depends_on:
+      - rabbitmq
+    environment:
+      - server_url=${server_url} # Variável de ambiente para a URL do servidor
+    ports:
+      - "8000:5000" # Porta da API
+
+  consumer:
+    network_mode: host
+    build:
+      context: ./client # Caminho para o diretório da aplicação consumer
+    depends_on:
+      - rabbitmq
+
+volumes:
+  rabbitmq_data: {} # Volume para persistir os dados do RabbitMQ

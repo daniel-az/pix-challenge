@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: server
+  name: server
+  namespace: pix-challenge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: server
+    spec:
+      containers:
+      - image: pix_challenge-server:latest
+        name: pix-challenge-server-msx8h
+        resources: {}
+status: {}

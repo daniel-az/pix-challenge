@@ -1,0 +1,5 @@
+requests
+jsonschema
+pika
+urllib3==1.26.6 
+retry
